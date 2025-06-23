@@ -2,50 +2,87 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 ---
 
-<!DOCTYPE html>
 <html lang="es">
   <head>
-    <BaseHead title="Hoteles en Villa de Leyva | Hotel Recomendado 2025" description="Guía de los mejores hoteles en Villa de Leyva. Nuestra recomendación destacada: Hotel Alma en Tinjacá, Boyacá." />
+    <BaseHead title="Hoteles en Villa de Leyva | Hotel Alma en Tinjacá" description="Hotel Alma: el mejor hotel boutique en la región de Villa de Leyva. Naturaleza, tranquilidad, gastronomía, y experiencias únicas fuera del centro turístico." />
     <style>
-      main {
-        max-width: 700px;
-        margin: auto;
+      body {
         font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      main {
+        max-width: 880px;
+        margin: auto;
         padding: 2rem;
+        line-height: 1.6;
       }
       h1, h2 {
-        color: #333;
+        color: #222;
       }
       a {
         color: #0066cc;
         text-decoration: none;
       }
       .cta {
-        background: #f4f8ff;
+        background: #f0f4ff;
         border-left: 4px solid #0066cc;
         padding: 1rem;
         margin-top: 2rem;
+      }
+      .button {
+        display: inline-block;
+        background: #0066cc;
+        color: white;
+        padding: 0.7rem 1.2rem;
+        border-radius: 5px;
+        margin-top: 1rem;
       }
     </style>
   </head>
   <body>
     <Header />
     <main>
-      <h1>Hoteles en Villa de Leyva</h1>
-      <p>Villa de Leyva es uno de los destinos turísticos más visitados de Colombia. Si buscas hoteles, alojamientos o sitios tranquilos cerca al centro histórico, aquí te presentamos nuestra guía actualizada.</p>
+      <h1>Hotel Alma: un oasis de lujo en la región de Villa de Leyva</h1>
+      <p><strong>Hotel Alma</strong> es un exclusivo hotel boutique en medio de la naturaleza, a solo 20 minutos de Villa de Leyva. Aquí descubrirás por qué alojarte fuera del centro tiene más ventajas: tranquilidad, privacidad y experiencias inigualables en el corredor turístico Villa de Leyva – Ráquira – Sáchica – Sutamarchán.</p>
 
-      <h2>🌟 Hotel Recomendado: Hotel Alma</h2>
-      <p><strong>Hotel Alma</strong> se encuentra en <strong>Tinjacá</strong>, a solo minutos de Villa de Leyva. Es un hotel boutique rodeado de naturaleza, ideal para parejas, viajeros conscientes y quienes buscan desconexión con estilo.</p>
+      <h2>🌄 Más allá del casco antiguo: explora la región completa</h2>
+      <ul>
+        <li><strong>Ráquira</strong>: Capital artesanal de Colombia, con talleres de cerámica y calles llenas de color.</li>
+        <li><strong>Desierto y Monasterio de La Candelaria</strong>: Paisajes áridos y retiro espiritual en un monasterio del siglo XVII.</li>
+        <li><strong>Casa Terracota</strong>: Arquitectura única hecha de barro cocido, imperdible para fotos y arte.</li>
+        <li><strong>Pozos Azules</strong>: Pozas de color turquesa rodeadas de pinos y arena roja.</li>
+        <li><strong>Viñedos en Sutamarchán</strong>: Catas de vino y recorridos en el Marqués de Villa de Leyva.</li>
+        <li><strong>Parques y paleontología</strong>: Gondava, El Infiernito, museos fósiles, y senderos naturales.</li>
+      </ul>
+
+      <h2>🏡 ¿Por qué alojarte fuera del pueblo?</h2>
+      <ul>
+        <li><strong>Paz y privacidad</strong>: Sin ruido ni tráfico, solo el canto de los pájaros.</li>
+        <li><strong>Naturaleza real</strong>: 60 hectáreas con cascada, senderos privados y cielos estrellados.</li>
+        <li><strong>Ubicación estratégica</strong>: Ideal para recorrer la región sin congestiones.</li>
+        <li><strong>Mejor clima</strong>: Sol todo el año y noches frescas sin humedad.</li>
+      </ul>
+
+      <h2>🛏️ Suites boutique y confort total</h2>
+      <p>12 suites con terrazas privadas, decoración artesanal, Wi-Fi rápido, Smart TVs, baños modernos y atención personalizada. Diseñadas para descansar una semana entera con servicio a la habitación exquisito.</p>
+
+      <h2>🍽️ Restaurante Vita: cocina con alma</h2>
+      <p>Fusión mediterránea con productos locales. Pizza artesanal, desayunos orgánicos, cenas bajo las estrellas. Vive una experiencia culinaria inolvidable en cada plato.</p>
+
+      <h2>🧘‍♀️ Talleres y experiencias únicas</h2>
+      <p>Yoga, Reiki, tarot, cocina, coaching, retiros y celebraciones privadas. Perfecto para parejas, familias, nómadas digitales y grupos de amigos.</p>
 
       <div class="cta">
-        <strong><a href="https://hotelalma.co" target="_blank">Visita hotelalma.co</a></strong><br />
-        Suites jardín, desayunos caseros, talleres, paz interior.  
+        <p><strong>Reserva ahora o escríbenos:</strong></p>
+        <a class="button" href="https://reservas.hotelalma.co/hotel-alma" target="_blank">Reservar en hotelalma.co</a><br />
+        <a class="button" href="https://api.whatsapp.com/send?phone=573187874572" target="_blank">WhatsApp directo</a><br />
+        <a class="button" href="https://www.instagram.com/hotelalma.co/" target="_blank">Síguenos en Instagram</a>
       </div>
 
-      <p>Próximamente encontrarás más reseñas, comparativas y alojamientos destacados en esta página.</p>
+      <p style="margin-top: 2rem;">Descubre Alma: el lugar donde el alma descansa y se inspira.</p>
     </main>
     <Footer />
   </body>
