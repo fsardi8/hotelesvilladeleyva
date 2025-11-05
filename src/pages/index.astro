@@ -1,40 +1,44 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+// Importa componentes compartidos que conforman la estructura básica del sitio
+import BaseHead from '../components/BaseHead.astro'; // Cabecera del documento con meta tags y título
+import Header from '../components/Header.astro';     // Encabezado (logo, navegación, etc.)
+import Footer from '../components/Footer.astro';     // Pie de página
 ---
 
 <html lang="es">
   <head>
+    <!-- Meta información personalizada para SEO y redes sociales -->
     <BaseHead title="Hoteles en Villa de Leyva | Hotel Alma en Tinjacá" description="Hotel Alma: el mejor hotel boutique en la región de Villa de Leyva. Naturaleza, tranquilidad, gastronomía, y experiencias únicas fuera del centro turístico." />
+
+    <!-- Estilos básicos integrados para una presentación limpia -->
     <style>
       body {
-        font-family: sans-serif;
+        font-family: sans-serif; /* Fuente principal */
         margin: 0;
         padding: 0;
       }
       main {
-        max-width: 880px;
-        margin: auto;
+        max-width: 880px; /* Ancho máximo legible */
+        margin: auto;     /* Centrado horizontal */
         padding: 2rem;
-        line-height: 1.6;
+        line-height: 1.6; /* Espaciado entre líneas */
       }
       h1, h2 {
-        color: #222;
+        color: #222; /* Color neutro para títulos */
       }
       a {
-        color: #0066cc;
+        color: #0066cc; /* Azul visible para enlaces */
         text-decoration: none;
       }
       .cta {
-        background: #f0f4ff;
-        border-left: 4px solid #0066cc;
+        background: #f0f4ff; /* Fondo suave para destacar */
+        border-left: 4px solid #0066cc; /* Línea lateral azul */
         padding: 1rem;
         margin-top: 2rem;
       }
       .button {
-        display: inline-block;
-        background: #0066cc;
+        display: inline-block; /* Estilo de botón en línea */
+        background: #0066cc;   /* Fondo azul */
         color: white;
         padding: 0.7rem 1.2rem;
         border-radius: 5px;
@@ -43,13 +47,15 @@ import Footer from '../components/Footer.astro';
     </style>
   </head>
   <body>
-    <Header />
+    <Header /> <!-- Encabezado común en todas las páginas -->
+
     <main>
       <h1>Hotel Alma: un oasis de lujo en la región de Villa de Leyva</h1>
       <p><strong>Hotel Alma</strong> es un exclusivo hotel boutique en medio de la naturaleza, a solo 20 minutos de Villa de Leyva. Aquí descubrirás por qué alojarte fuera del centro tiene más ventajas: tranquilidad, privacidad y experiencias inigualables en el corredor turístico Villa de Leyva – Ráquira – Sáchica – Sutamarchán.</p>
 
       <h2>🌄 Más allá del casco antiguo: explora la región completa</h2>
       <ul>
+        <!-- Lista de destinos turísticos fuera del casco urbano -->
         <li><strong>Ráquira</strong>: Capital artesanal de Colombia, con talleres de cerámica y calles llenas de color.</li>
         <li><strong>Desierto y Monasterio de La Candelaria</strong>: Paisajes áridos y retiro espiritual en un monasterio del siglo XVII.</li>
         <li><strong>Casa Terracota</strong>: Arquitectura única hecha de barro cocido, imperdible para fotos y arte.</li>
@@ -60,6 +66,7 @@ import Footer from '../components/Footer.astro';
 
       <h2>🏡 ¿Por qué alojarte fuera del pueblo?</h2>
       <ul>
+        <!-- Beneficios de no quedarse dentro del pueblo -->
         <li><strong>Paz y privacidad</strong>: Sin ruido ni tráfico, solo el canto de los pájaros.</li>
         <li><strong>Naturaleza real</strong>: 60 hectáreas con cascada, senderos privados y cielos estrellados.</li>
         <li><strong>Ubicación estratégica</strong>: Ideal para recorrer la región sin congestiones.</li>
@@ -67,15 +74,19 @@ import Footer from '../components/Footer.astro';
       </ul>
 
       <h2>🛏️ Suites boutique y confort total</h2>
+      <!-- Descripción breve de las habitaciones y su confort -->
       <p>12 suites con terrazas privadas, decoración artesanal, Wi-Fi rápido, Smart TVs, baños modernos y atención personalizada. Diseñadas para descansar una semana entera con servicio a la habitación exquisito.</p>
 
       <h2>🍽️ Restaurante Vita: cocina con alma</h2>
+      <!-- Valor gastronómico como experiencia destacada -->
       <p>Fusión mediterránea con productos locales. Pizza artesanal, desayunos orgánicos, cenas bajo las estrellas. Vive una experiencia culinaria inolvidable en cada plato.</p>
 
       <h2>🧘‍♀️ Talleres y experiencias únicas</h2>
+      <!-- Lista de actividades diferenciales del hotel -->
       <p>Yoga, Reiki, tarot, cocina, coaching, retiros y celebraciones privadas. Perfecto para parejas, familias, nómadas digitales y grupos de amigos.</p>
 
       <div class="cta">
+        <!-- Llamado a la acción con enlaces clave -->
         <p><strong>Reserva ahora o escríbenos:</strong></p>
         <a class="button" href="https://reservas.hotelalma.co/hotel-alma" target="_blank">Reservar en hotelalma.co</a><br />
         <a class="button" href="https://api.whatsapp.com/send?phone=573187874572" target="_blank">WhatsApp directo</a><br />
@@ -84,6 +95,7 @@ import Footer from '../components/Footer.astro';
 
       <p style="margin-top: 2rem;">Descubre Alma: el lugar donde el alma descansa y se inspira.</p>
     </main>
-    <Footer />
+
+    <Footer /> <!-- Pie de página común -->
   </body>
 </html>
