@@ -1,0 +1,140 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// ⚙️ Ajusta este ID con tu GA4
+const GA4_ID = 'G-83WYW3XP87';
+---
+<html lang="es">
+  <head>
+    <BaseHead
+      title="Hoteles en Villa de Leyva | Guía neutral y cómo elegir"
+      description="Guía neutral para elegir hoteles en Villa de Leyva: por qué visitar, cómo elegir, zonas y tipologías, qué hacer, cómo llegar y recursos útiles. También una opción boutique sostenible en Tinjacá."
+    />
+
+    <!-- Preload del hero -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/villa/hero-plaza.jpg"
+      imagesrcset="/images/villa/hero-plaza.jpg 1x"
+      fetchpriority="high"
+    />
+
+    <!-- GA4: solo se inyecta en producción -->
+    {import.meta.env.PROD && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA4_ID);
+        </script>
+      </>
+    )}
+
+    <style>
+      :root { --ink:#222; --sub:#6b6b6b; --brand:#2f6d5f; --bg:#f6f0e5; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--ink); background:var(--bg); }
+      a { color: var(--brand); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 1.25rem 6rem; line-height: 1.7; } /* + espacio abajo para el FAB */
+      h1 { font-size: clamp(2rem, 2.5vw + 1.2rem, 3rem); margin: .25rem 0 1rem; }
+      h2 { margin-top: 2.25rem; font-size: clamp(1.35rem, 1.2vw + 1rem, 1.8rem); }
+      p.lead { color:#333; font-size: 1.05rem; }
+
+      .hero {
+        background: linear-gradient(180deg, #ffffffcc, #ffffffaa), url('/images/villa/hero-plaza.jpg') center/cover no-repeat;
+        border-radius: 14px; padding: 2rem; margin: 1rem 0 2rem;
+      }
+
+      /* Sticky TOC */
+      .sticky-toc {
+        position: sticky; top: .75rem; z-index: 5;
+        background:#fff; border:1px solid #e6dfd0; border-radius:12px;
+        padding:.5rem; margin:1rem 0 2rem;
+      }
+      .sticky-toc .toc { margin:0; }
+
+      .toc { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:.5rem; padding:0; list-style:none; }
+      .toc a { display:block; background:#fff; padding:.75rem .9rem; border:1px solid #e6dfd0; border-radius:10px; }
+
+      .two { display:grid; grid-template-columns: 1.4fr .9fr; gap:1.25rem; }
+      .card { background:#fff; border:1px solid #e6dfd0; border-radius:14px; padding:1rem 1.1rem; }
+      .note { background:#eaf6f2; border-left:4px solid var(--brand); padding: .9rem 1rem; border-radius:10px; }
+      img.fit { width:100%; height:auto; border-radius:12px; border:1px solid #e6dfd0; }
+      ul { margin: .25rem 0 1rem 1.1rem; }
+
+      .badges { display:flex; gap:.75rem; flex-wrap:wrap; margin:.5rem 0 1rem; }
+      .badge { background:#fff; border:1px solid #e6dfd0; border-radius:999px; padding:.35rem .7rem; font-size:.9rem; color:#444; }
+
+      @media (max-width: 860px){ .two { grid-template-columns:1fr; } }
+
+      /* WhatsApp FAB */
+      .wa-fab{
+        position:fixed; right:16px; bottom:16px;
+        display:grid; place-items:center;
+        width:56px; height:56px; border-radius:999px;
+        background:#25D366; color:#fff; box-shadow:0 6px 18px rgba(0,0,0,.18);
+        border:0; transition:transform .15s ease, box-shadow .15s ease;
+        z-index:30;
+      }
+      .wa-fab:hover{ transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.22); }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <section class="hero card">
+        <h1>Hoteles en Villa de Leyva</h1>
+        <p class="lead">Guía neutral para elegir dónde dormir y cómo vivir el destino en Boyacá. Un cielo tan limpio que las estrellas parecen gritar. Piedra, historia y un silencio que abraza.</p>
+
+        <div class="sticky-toc">
+          <ul class="toc">
+            <li><a href="#por-que-visitar">Por qué visitar</a></li>
+            <li><a href="#como-elegir">Cómo elegir</a></li>
+            <li><a href="#zonas-tipologias">Zonas y tipologías</a></li>
+            <li><a href="#que-hacer">Qué hacer</a></li>
+            <li><a href="#planifica">Planifica tu viaje</a></li>
+            <li><a href="#cielos-limpios">Escapadas y cielos limpios</a></li>
+            <li><a href="#como-llegar">Cómo llegar</a></li>
+            <li><a href="#recursos-utiles">Recursos útiles</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- … TU CONTENIDO EXISTENTE DE SECCIONES (por-que-visitar, como-elegir, etc.), sin cambios salvo las rutas de imágenes … -->
+    </main>
+
+    <!-- Botón flotante WhatsApp (reemplaza el número si quieres) -->
+    <a
+      href="https://wa.me/573001112233?text=Hola%20quiero%20recomendaciones%20de%20hoteles%20en%20Villa%20de%20Leyva"
+      class="wa-fab" aria-label="Chatea por WhatsApp" target="_blank" rel="noopener"
+    >
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <path d="M19.1 17.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0-1.4-.5-2.6-1.7-1.7-2.2-1.9-2.5 0-.5.2-.7c.2-.2.5-.7.6-.9.2-.2.2-.4 0-.7s-.7-1.6-1-2.2c-.3-.6-.6-.5-.7-.5h-.6c-.2 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.3 3.6 1.5 3.8c.2.3 2.6 4 6.3 5.5.9.4 1.6.6 2.1.8.9.3 1.7.3 2.3.2.7-.1 2.1-.9 2.4-1.8s.3-1.6.2-1.8-.3-.2-.6-.4z" fill="currentColor"/>
+        <path d="M26.7 5.3C23.9 2.5 20.1 1 16.1 1 8.4 1 2.2 7.1 2.2 14.9c0 2.4.6 4.8 1.7 6.9L2 31l9.4-2.5c2 1.1 4.3 1.7 6.7 1.7 7.7 0 13.9-6.2 13.9-13.9 0-3.7-1.5-7.5-4.3-10.3zM16.1 28c-2.2 0-4.3-.6-6.2-1.7l-.4-.2-5.5 1.5 1.5-5.4-.2-.4c-1.1-1.9-1.7-4.1-1.7-6.4C3.6 8 9.3 2.3 16.1 2.3c3.3 0 6.4 1.3 8.7 3.6 2.3 2.3 3.6 5.4 3.6 8.7C28.4 22.7 22.7 28.4 16.1 28.4z" fill="currentColor"/>
+      </svg>
+    </a>
+
+    <!-- Evento GA4 para clic en WhatsApp -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const wa = document.querySelector('.wa-fab');
+        if (!wa) return;
+        wa.addEventListener('click', () => {
+          if (typeof gtag === 'function') {
+            gtag('event', 'click_whatsapp', { location: 'floating_button' });
+          }
+        });
+      });
+    </script>
+
+    <Footer />
+  </body>
+</html>
