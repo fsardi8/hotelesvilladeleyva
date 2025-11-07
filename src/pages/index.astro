@@ -1,101 +1,219 @@
 ---
-// Importa componentes compartidos que conforman la estructura básica del sitio
-import BaseHead from '../components/BaseHead.astro'; // Cabecera del documento con meta tags y título
-import Header from '../components/Header.astro';     // Encabezado (logo, navegación, etc.)
-import Footer from '../components/Footer.astro';     // Pie de página
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// ⚙️ Ajusta este ID con tu GA4 (lo ves como G-XXXXXXXXXX en Google Analytics)
+const GA4_ID = 'G-83WYW3XP87';
 ---
 
 <html lang="es">
   <head>
-    <!-- Meta información personalizada para SEO y redes sociales -->
-    <BaseHead title="Hoteles en Villa de Leyva | Hotel Alma en Tinjacá" description="Hotel Alma: el mejor hotel boutique en la región de Villa de Leyva. Naturaleza, tranquilidad, gastronomía, y experiencias únicas fuera del centro turístico." />
+    <BaseHead
+      title="Hoteles en Villa de Leyva | Guía neutral y cómo elegir"
+      description="Guía neutral para elegir hoteles en Villa de Leyva: por qué visitar, cómo elegir, zonas y tipologías, qué hacer, cómo llegar y recursos útiles. También una opción boutique sostenible en Tinjacá."
+    />
 
-    <!-- Estilos básicos integrados para una presentación limpia -->
+    <!-- GA4: solo se inyecta en producción -->
+    {import.meta.env.PROD && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{GA4_ID}');
+        </script>
+      </>
+    )}
+
     <style>
-      body {
-        font-family: sans-serif; /* Fuente principal */
-        margin: 0;
-        padding: 0;
-      }
-      main {
-        max-width: 880px; /* Ancho máximo legible */
-        margin: auto;     /* Centrado horizontal */
-        padding: 2rem;
-        line-height: 1.6; /* Espaciado entre líneas */
-      }
-      h1, h2 {
-        color: #222; /* Color neutro para títulos */
-      }
-      a {
-        color: #0066cc; /* Azul visible para enlaces */
-        text-decoration: none;
-      }
-      .cta {
-        background: #f0f4ff; /* Fondo suave para destacar */
-        border-left: 4px solid #0066cc; /* Línea lateral azul */
-        padding: 1rem;
-        margin-top: 2rem;
-      }
-      .button {
-        display: inline-block; /* Estilo de botón en línea */
-        background: #0066cc;   /* Fondo azul */
-        color: white;
-        padding: 0.7rem 1.2rem;
-        border-radius: 5px;
-        margin-top: 1rem;
-      }
+      :root { --ink:#222; --sub:#6b6b6b; --brand:#2f6d5f; --bg:#f6f0e5; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--ink); background:var(--bg); }
+      a { color: var(--brand); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; line-height: 1.7; }
+      h1 { font-size: clamp(2rem, 2.5vw + 1.2rem, 3rem); margin: .25rem 0 1rem; }
+      h2 { margin-top: 2.25rem; font-size: clamp(1.35rem, 1.2vw + 1rem, 1.8rem); }
+      p.lead { color:#333; font-size: 1.05rem; }
+      .hero { background: linear-gradient(180deg, #ffffffcc, #ffffffaa), url('/blog-placeholder-1.jpg') center/cover no-repeat; border-radius: 14px; padding: 2rem; margin: 1rem 0 2rem; }
+      .toc { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:.5rem; margin:1rem 0 2rem; padding:0; list-style:none; }
+      .toc a { display:block; background:#fff; padding:.75rem .9rem; border:1px solid #e6dfd0; border-radius:10px; }
+      .two { display:grid; grid-template-columns: 1.4fr .9fr; gap:1.25rem; }
+      .card { background:#fff; border:1px solid #e6dfd0; border-radius:14px; padding:1rem 1.1rem; }
+      .note { background:#eaf6f2; border-left:4px solid var(--brand); padding: .9rem 1rem; border-radius:10px; }
+      img.fit { width:100%; height:auto; border-radius:12px; border:1px solid #e6dfd0; }
+      ul { margin: .25rem 0 1rem 1.1rem; }
+      .badges { display:flex; gap:.75rem; flex-wrap:wrap; margin:.5rem 0 1rem; }
+      .badge { background:#fff; border:1px solid #e6dfd0; border-radius:999px; padding:.35rem .7rem; font-size:.9rem; color:#444; }
+      @media (max-width: 860px){ .two { grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
-    <Header /> <!-- Encabezado común en todas las páginas -->
+    <Header />
 
     <main>
-      <h1>Hotel Alma: un oasis de lujo en la región de Villa de Leyva</h1>
-      <p><strong>Hotel Alma</strong> es un exclusivo hotel boutique en medio de la naturaleza, a solo 20 minutos de Villa de Leyva. Aquí descubrirás por qué alojarte fuera del centro tiene más ventajas: tranquilidad, privacidad y experiencias inigualables en el corredor turístico Villa de Leyva – Ráquira – Sáchica – Sutamarchán.</p>
+      <section class="hero card">
+        <h1>Hoteles en Villa de Leyva</h1>
+        <p class="lead">Guía neutral para elegir dónde dormir y cómo vivir el destino en Boyacá. Un cielo tan limpio que las estrellas parecen gritar. Piedra, historia y un silencio que abraza.</p>
 
-      <h2>🌄 Más allá del casco antiguo: explora la región completa</h2>
-      <ul>
-        <!-- Lista de destinos turísticos fuera del casco urbano -->
-        <li><strong>Ráquira</strong>: Capital artesanal de Colombia, con talleres de cerámica y calles llenas de color.</li>
-        <li><strong>Desierto y Monasterio de La Candelaria</strong>: Paisajes áridos y retiro espiritual en un monasterio del siglo XVII.</li>
-        <li><strong>Casa Terracota</strong>: Arquitectura única hecha de barro cocido, imperdible para fotos y arte.</li>
-        <li><strong>Pozos Azules</strong>: Pozas de color turquesa rodeadas de pinos y arena roja.</li>
-        <li><strong>Viñedos en Sutamarchán</strong>: Catas de vino y recorridos en el Marqués de Villa de Leyva.</li>
-        <li><strong>Parques y paleontología</strong>: Gondava, El Infiernito, museos fósiles, y senderos naturales.</li>
-      </ul>
+        <ul class="toc">
+          <li><a href="#por-que-visitar">Por qué visitar</a></li>
+          <li><a href="#como-elegir">Cómo elegir</a></li>
+          <li><a href="#zonas-tipologias">Zonas y tipologías</a></li>
+          <li><a href="#que-hacer">Qué hacer</a></li>
+          <li><a href="#planifica">Planifica tu viaje</a></li>
+          <li><a href="#cielos-limpios">Escapadas y cielos limpios</a></li>
+          <li><a href="#como-llegar">Cómo llegar</a></li>
+          <li><a href="#recursos-utiles">Recursos útiles</a></li>
+        </ul>
+      </section>
 
-      <h2>🏡 ¿Por qué alojarte fuera del pueblo?</h2>
-      <ul>
-        <!-- Beneficios de no quedarse dentro del pueblo -->
-        <li><strong>Paz y privacidad</strong>: Sin ruido ni tráfico, solo el canto de los pájaros.</li>
-        <li><strong>Naturaleza real</strong>: 60 hectáreas con cascada, senderos privados y cielos estrellados.</li>
-        <li><strong>Ubicación estratégica</strong>: Ideal para recorrer la región sin congestiones.</li>
-        <li><strong>Mejor clima</strong>: Sol todo el año y noches frescas sin humedad.</li>
-      </ul>
+      <section id="por-que-visitar" class="two">
+        <div>
+          <h2>Por qué visitar Villa de Leyva</h2>
+          <p>Villa de Leyva no es solo un pueblo, es un viaje en el tiempo. Sus calles empedradas y su arquitectura colonial, casi intacta desde el siglo XVI, te invitan a un recorrido por la historia de Colombia. Cada fachada blanca y cada tejado de barro guardan siglos de relatos, convirtiéndola en un verdadero pueblo patrimonio.</p>
+          <p>Más allá de su encanto histórico, Villa de Leyva se beneficia de un clima seco y cielos despejados gran parte del año: perfecta para observar estrellas. Es un destino ideal en Boyacá: aroma de historia en el aire, silencio roto solo por el viento, y paisajes que quitan el aliento.</p>
+        </div>
+        <div><img class="fit" src="/blog-placeholder-about.jpg" alt="Calle colonial en Villa de Leyva" loading="lazy" /></div>
+      </section>
 
-      <h2>🛏️ Suites boutique y confort total</h2>
-      <!-- Descripción breve de las habitaciones y su confort -->
-      <p>12 suites con terrazas privadas, decoración artesanal, Wi-Fi rápido, Smart TVs, baños modernos y atención personalizada. Diseñadas para descansar una semana entera con servicio a la habitación exquisito.</p>
+      <section id="como-elegir">
+        <h2>Cómo elegir tu hotel</h2>
+        <div class="two">
+          <div class="card">
+            <ul>
+              <li><strong>Silencio vs. ruido:</strong> ¿Tranquilidad absoluta o bullicio del centro?</li>
+              <li><strong>Cercanía al centro:</strong> A pasos de la Plaza Mayor o afueras con calma.</li>
+              <li><strong>Acceso:</strong> Si vas en carro, verifica parqueadero. La vía Sáchica–Tinjacá es alternativa hermosa.</li>
+              <li><strong>Vistas:</strong> Montañas, tejados coloniales o jardines.</li>
+              <li><strong>Sostenibilidad real:</strong> Pregunta por acciones concretas.</li>
+              <li><strong>Servicios diferenciadores:</strong> Desayuno local, buena conectividad, servicio.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <p><strong>Micro-tips por perfil</strong></p>
+            <ul>
+              <li><em>Parejas:</em> ambientes románticos, chimenea, buen restaurante.</li>
+              <li><em>Familias:</em> habitaciones amplias, zonas verdes, cercanía a plazas, parqueadero.</li>
+              <li><em>Viajeros solos:</em> áreas comunes acogedoras o tours organizados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <h2>🍽️ Restaurante Vita: cocina con alma</h2>
-      <!-- Valor gastronómico como experiencia destacada -->
-      <p>Fusión mediterránea con productos locales. Pizza artesanal, desayunos orgánicos, cenas bajo las estrellas. Vive una experiencia culinaria inolvidable en cada plato.</p>
+      <section id="zonas-tipologias">
+        <h2>Zonas y tipologías de alojamiento</h2>
+        <div class="two">
+          <div>
+            <h3>Centro Histórico</h3>
+            <p><strong>Ambiente:</strong> vibrante; Plaza Mayor como epicentro.</p>
+            <p><strong>Acceso:</strong> a pie a restaurantes, tiendas y atractivos.</p>
+            <p><strong>Privacidad:</strong> menor; puede ser ruidoso en fines de semana.</p>
+          </div>
+          <div>
+            <h3>Anillo Rural (Tinjacá–Sáchica)</h3>
+            <p><strong>Ambiente:</strong> paz, naturaleza y cielos estrellados.</p>
+            <p><strong>Acceso:</strong> en carro; carretera con paisajes hermosos.</p>
+            <p><strong>Privacidad:</strong> máxima; jardines y vistas panorámicas.</p>
+          </div>
+        </div>
 
-      <h2>🧘‍♀️ Talleres y experiencias únicas</h2>
-      <!-- Lista de actividades diferenciales del hotel -->
-      <p>Yoga, Reiki, tarot, cocina, coaching, retiros y celebraciones privadas. Perfecto para parejas, familias, nómadas digitales y grupos de amigos.</p>
+        <div class="badges">
+          <span class="badge">Colonial Clásico</span>
+          <span class="badge">Boutique Sostenible</span>
+          <span class="badge">Campestre con Vista</span>
+          <span class="badge">Familiar</span>
+          <span class="badge">Adults-Friendly</span>
+          <span class="badge">Pet-Friendly</span>
+        </div>
 
-      <div class="cta">
-        <!-- Llamado a la acción con enlaces clave -->
-        <p><strong>Reserva ahora o escríbenos:</strong></p>
-        <a class="button" href="https://reservas.hotelalma.co/hotel-alma" target="_blank">Reservar en hotelalma.co</a><br />
-        <a class="button" href="https://api.whatsapp.com/send?phone=573187874572" target="_blank">WhatsApp directo</a><br />
-        <a class="button" href="https://www.instagram.com/hotelalma.co/" target="_blank">Síguenos en Instagram</a>
-      </div>
+        <p class="note">Boutique sostenible en Tinjacá, a minutos de Villa de Leyva: arquitectura bioclimática, silencio real y cielos limpios.</p>
+      </section>
 
-      <p style="margin-top: 2rem;">Descubre Alma: el lugar donde el alma descansa y se inspira.</p>
+      <section id="que-hacer" class="two">
+        <div>
+          <h2>Qué hacer en Villa de Leyva</h2>
+          <p>Explora la Plaza Mayor, museos, Pozos Azules, Ráquira y el Santuario de Flora y Fauna de Iguaque (con respeto a regulaciones ambientales). La cocina de huerta y el pan de masa madre son sello local: busca lugares que trabajen con productos del territorio.</p>
+          <p>En el calendario: <em>Festival de Cometas</em> (ago), <em>Noche de Velitas</em> (dic) y <em>Semana Santa</em>. Los puentes traen ferias y vida cultural.</p>
+        </div>
+        <div><img class="fit" src="/blog-placeholder-3.jpg" alt="Plaza y arquitectura" loading="lazy" /></div>
+      </section>
+
+      <section id="planifica">
+        <h2>Planifica tu viaje</h2>
+        <div class="two">
+          <div class="card">
+            <p><strong>Mejor época:</strong> todo el año; baja (feb–mar, sep–nov) para clima templado y menos gente.</p>
+            <p><strong>Entre semana:</strong> experiencia más tranquila y auténtica, mejor disponibilidad y precios.</p>
+          </div>
+          <div class="card">
+            <ul>
+              <li><strong>Puentes y festivos:</strong> más ocupación y eventos → reserva con anticipación.</li>
+              <li><strong>Entre semana:</strong> silencio; ideal parejas/bienestar.</li>
+              <li><strong>Ago (Cometas) / Dic (Velitas):</strong> alta demanda; Tinjacá ayuda a evitar ruido.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="two" style="margin-top:1rem;">
+          <div class="card">
+            <p><strong>Qué llevar</strong></p>
+            <ul>
+              <li>Ropa cómoda para caminar y chaqueta para noches frías.</li>
+              <li>Protector solar y sombrero.</li>
+              <li>Zapatos cerrados (impermeables si exploras alrededores).</li>
+              <li>Cámara para el paisaje.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <p><strong>Consejos de sostenibilidad</strong></p>
+            <ul>
+              <li>Agua: úsala de forma consciente.</li>
+              <li>Residuos: botella reutilizable; evita plásticos de un solo uso.</li>
+              <li>Consumo local: apoya productores y artesanos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="cielos-limpios" class="two">
+        <div>
+          <h2>Escapadas de bienestar y cielos limpios</h2>
+          <p>Caminatas suaves, observación astronómica y siembra de un árbol: un refugio bioclimático para reconectar bajo cielos de Boyacá.</p>
+        </div>
+        <div><img class="fit" src="/blog-placeholder-4.jpg" alt="Cielos estrellados" loading="lazy" /></div>
+      </section>
+
+      <section id="como-llegar" class="two">
+        <div>
+          <h2>Cómo llegar</h2>
+          <ul>
+            <li><strong>Desde Bogotá (3.5–4 h):</strong> Autopista Norte → Tunja → desvío a Villa de Leyva. También buses directos desde Terminal Salitre.</li>
+            <li><strong>Desde Tunja (~1 h):</strong> vía en buen estado; buses y colectivos frecuentes.</li>
+          </ul>
+          <p class="note">Tinjacá es una base perfecta: ~10 min del centro, vía amable y cielos despejados. Las condiciones de carretera varían en lluvias: conduce con precaución.</p>
+        </div>
+        <div><img class="fit" src="/blog-placeholder-2.jpg" alt="Carretera rural" loading="lazy" /></div>
+      </section>
+
+      <section id="recursos-utiles">
+        <h2>Fuentes y footer legal</h2>
+        <p>Recurso editorial independiente sobre Villa de Leyva y entorno (incluye Tinjacá). No pertenece a entidades gubernamentales ni a establecimientos listados. <em>Última actualización: octubre 2025.</em></p>
+        <p><strong>Autor:</strong> Guía Boyacá (equipo editorial) — “Periodistas de viaje y expertos locales; actualizamos estacionalmente rutas, clima, eventos y consejos.”</p>
+
+        <h3>Mapa & recursos útiles</h3>
+        <ul>
+          <li><a href="https://www.mincit.gov.co" target="_blank" rel="noopener">MinCIT</a></li>
+          <li><a href="https://www.boyaca.gov.co" target="_blank" rel="noopener">Gobernación Boyacá Turismo</a></li>
+          <li><a href="https://www.villadeleyva-boyaca.gov.co" target="_blank" rel="noopener">Alcaldía Villa de Leyva</a></li>
+          <li><a href="https://www.parquesnacionales.gov.co" target="_blank" rel="noopener">Parques Nacionales de Colombia</a></li>
+        </ul>
+        <p class="note">Verifica horarios de apertura y regulaciones actualizadas antes de tu visita.</p>
+      </section>
     </main>
 
-    <Footer /> <!-- Pie de página común -->
+    <Footer />
   </body>
 </html>
