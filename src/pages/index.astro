@@ -218,17 +218,56 @@ import heroJpg from '../assets/villa/hero.jpg';
     a.cta-button:hover { filter:brightness(1.05); }
     a:focus-visible { outline: 2px solid #0d7a63; outline-offset: 3px; }
 
+	.cta-backdrop {
+	  background: rgba(255, 255, 255, 0.12);  /* soft white veil, not dk glass */
+	  backdrop-filter: blur(2px);
+	  -webkit-backdrop-filter: blur(2px);
+	  border-radius: 0.5rem;
+	  padding: 1.5rem 1.75rem;
+	  max-width: 750px;
+	  margin: 0 1rem;
+	  color: #fff; /* pure white text */
+	}
+
+	.cta-alma h2 {
+	  font-size: clamp(1.5rem, 2.5vw, 2rem);
+	  margin: 0 0 1rem;
+	  color: #fff;
+	  font-weight: 600;
+	}
+
+	.cta-alma p {
+	  font-size: 1.05rem;
+	  max-width: 60ch;
+	  margin: 0 auto 1.5rem;
+	  color: #fff;
+	}
+
+	/* Bright orange button (original vibe) */
+	a.cta-button {
+	  display: inline-block;
+	  background-color: #e67300;
+	  color: #fff;
+	  text-decoration: none;
+	  padding: 0.75rem 1.5rem;
+	  font-weight: bold;
+	  border-radius: 4px;
+	  transition: background-color 0.2s ease, transform 0.1s ease;
+	}
+
+	a.cta-button:hover {
+	  background-color: #cc5c00;
+	}
+
+	a.cta-button:active {
+	  transform: translateY(1px);
+	}
+
+	a.cta-button:focus-visible {
+	  outline: 2px solid #ffd3a6;
+	  outline-offset: 3px;
+	}
     
-    .cta-backdrop { background: rgba(0,0,0,.5); backdrop-filter: blur(1.5px); border-radius: .5rem; padding: 1.25rem 1.5rem; max-width: 800px; }
-    .cta-alma h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-    .cta-alma p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
-    }
     @media (max-width: 768px) {
       .zones-typologies .columns-container {
         flex-direction: column;
