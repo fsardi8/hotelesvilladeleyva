@@ -1,6 +1,4 @@
 ---
-import { Picture } from 'astro:assets';
-import heroJpg from '../assets/villa/hero.jpg';
 // (no frontmatter needed yet; keeping it empty)
 ---
 <html lang="es">
@@ -9,6 +7,9 @@ import heroJpg from '../assets/villa/hero.jpg';
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Descubre Villa de Leyva, sus atracciones, festivales y consejos de hospedaje. Encuentra alojamientos coloniales, hoteles boutique sostenibles y vive experiencias únicas en este pueblo mágico. Planifica tu viaje con Hotel Alma." />
+  <!-- Preconnect only (actual GA loads after onload) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
   <style>
     /* Espaciado lateral para secciones */
     section {
@@ -61,7 +62,7 @@ import heroJpg from '../assets/villa/hero.jpg';
       text-align: center;
       color: #fff;
       position: relative;
-      overflow: clip;
+      overflow: clip; /* avoid deprecated overflow:visible on media */
     }
     .hero .hero-media {
       display:block;
@@ -77,7 +78,7 @@ import heroJpg from '../assets/villa/hero.jpg';
       place-items:center;
     }
     .hero .backdrop {
-      background: rgba(0,0,0,.45);
+      background: rgba(0,0,0,.28);
       -webkit-backdrop-filter: blur(2px);
       backdrop-filter: blur(2px);
       border-radius: .5rem;
@@ -91,12 +92,12 @@ import heroJpg from '../assets/villa/hero.jpg';
       font-size: 2.8rem;
       color: #f5f5f5;
     }
-    .hero p { 
-	  margin:.75rem auto 0; 
-	  color:#f7f9f8; 
-	  font-size: clamp(.95rem, 1.6vw, 1.15rem); 
-	  line-height:1.6; 
-	}
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: .75rem auto 0;
+      line-height: 1.6;
+    }
 
     .tips-container {
       display: grid;
@@ -112,6 +113,7 @@ import heroJpg from '../assets/villa/hero.jpg';
       border: 1px solid #ddd6cc;
       border-radius: 10px;
       padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      position: relative;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       }
     .tip-card::before {
@@ -200,25 +202,9 @@ import heroJpg from '../assets/villa/hero.jpg';
       font-size: 0.9rem;
       margin: 0;
     }
-
-    .cta-alma { position:relative; overflow:clip; border-radius:16px; }
-    .cta-media { 
-	  display:block; width:100%; height:auto; 
-	  aspect-ratio: 21/9; object-fit:cover; 
-	}
-    .cta-overlay { 
-	  position:absolute; inset:0; display:grid; place-items:center; 
-	  padding:1rem; 
-	}
-    
-    a.cta-button { 
-	  background:#0d7a63; color:#fff; padding:.65rem 1rem; 
-	  border-radius:.66rem; display:inline-block; 
-	}
-    a.cta-button:hover { filter:brightness(1.05); }
-    a:focus-visible { outline: 2px solid #0d7a63; outline-offset: 3px; }
-
-    
+    .cta-alma { position: relative; overflow: clip; border-radius: 8px; margin: 3rem 0; text-align: center; color: #fff; }
+    .cta-media { display:block; width:100%; height:auto; aspect-ratio: 21/9; object-fit:cover; }
+    .cta-overlay { position:absolute; inset:0; display:grid; place-items:center; padding:1rem; }
     .cta-backdrop { background: rgba(0,0,0,.5); backdrop-filter: blur(1.5px); border-radius: .5rem; padding: 1.25rem 1.5rem; max-width: 800px; }
     .cta-alma h2 {
       font-size: 1.8rem;
@@ -228,6 +214,19 @@ import heroJpg from '../assets/villa/hero.jpg';
       font-size: 1.1rem;
       max-width: 600px;
       margin: 0 auto 2rem auto;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #e67300;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #cc5c00;
     }
     @media (max-width: 768px) {
       .zones-typologies .columns-container {
@@ -251,18 +250,15 @@ import heroJpg from '../assets/villa/hero.jpg';
 </head>
 <body>
   <main>
-	<!-- HERO: responsive AVIF/WebP/JPEG with priority -->
-    <section class="hero">
-      <Picture
-        src={heroJpg}
+	<section class="hero">
+      <!-- Make LCP discoverable & prioritized -->
+      <img
+        class="hero-media"
+        src="/images/villa/hero.jpg"
         alt="Hotel Alma en Villa de Leyva, fachada colonial frente al jardín"
-        widths={[360, 540, 720, 960, 1200]}
-        sizes="(max-width: 600px) 100vw, 1200px"
-        formats={['avif','webp','jpeg']}
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="hero-media"
       />
       <div class="overlay">
         <div class="backdrop">
@@ -271,7 +267,7 @@ import heroJpg from '../assets/villa/hero.jpg';
         </div>
       </div>
     </section>
-	
+    
     <section>
       <h2>Cómo elegir tu hotel</h2>
       <div class="tips-grid">
@@ -363,30 +359,23 @@ import heroJpg from '../assets/villa/hero.jpg';
     </section>
   </main>
   {import.meta.env.PROD && (
-	// Defer GA to idle so it doesn't affect TBT under throttling
-	<script is:inline>
-	  const deferGA = () => {
-		const p1 = document.createElement('link');
-		p1.rel = 'preconnect'; p1.href = 'https://www.googletagmanager.com'; p1.crossOrigin = 'anonymous';
-		const p2 = document.createElement('link');
-		p2.rel = 'preconnect'; p2.href = 'https://www.google-analytics.com'; p2.crossOrigin = 'anonymous';
-		document.head.append(p1, p2);
-		const s = document.createElement('script');
-		s.src = 'https://www.googletagmanager.com/gtag/js?id=G-83WYW3XP87';
-		s.async = true;
-		s.onload = () => {
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){ dataLayer.push(arguments); }
-		  gtag('js', new Date());
-		  gtag('config', 'G-83WYW3XP87', { anonymize_ip: true });
-		};
-		document.head.appendChild(s);
-	  };
-	  if (!navigator.connection || !navigator.connection.saveData) {
-		const rIC = window.requestIdleCallback || ((fn) => setTimeout(fn, 4000));
-		addEventListener('load', () => rIC(deferGA), { once: true });
-	  }
-	  </script>
-	)}
-  </body>
+    // Lazy-load Google Analytics AFTER first paint
+    <script is:inline>
+      if (!navigator.connection || !navigator.connection.saveData) {
+        window.addEventListener('load', () => {
+          const s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-83WYW3XP87';
+          s.async = true;
+          document.head.appendChild(s);
+          s.onload = () => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-83WYW3XP87', { anonymize_ip: true });
+          };
+        }, { once: true });
+      }
+    </script>
+  )}
+</body>
 </html>
