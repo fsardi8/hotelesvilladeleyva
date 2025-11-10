@@ -219,7 +219,7 @@ import heroJpg from '../assets/villa/hero.jpg';
     a:focus-visible { outline: 2px solid #0d7a63; outline-offset: 3px; }
 
 	.cta-backdrop {
-	  background: rgba(255, 255, 255, 0.12);  /* soft white veil, not dk glass */
+	  background: rgba(0,0,0,.38);
 	  backdrop-filter: blur(2px);
 	  -webkit-backdrop-filter: blur(2px);
 	  border-radius: 0.5rem;
@@ -402,30 +402,37 @@ import heroJpg from '../assets/villa/hero.jpg';
     </section>
   </main>
   {import.meta.env.PROD && (
-	// Defer GA to idle so it doesn't affect TBT under throttling
 	<script is:inline>
-	  const deferGA = () => {
-		const p1 = document.createElement('link');
-		p1.rel = 'preconnect'; p1.href = 'https://www.googletagmanager.com'; p1.crossOrigin = 'anonymous';
-		const p2 = document.createElement('link');
-		p2.rel = 'preconnect'; p2.href = 'https://www.google-analytics.com'; p2.crossOrigin = 'anonymous';
-		document.head.append(p1, p2);
-		const s = document.createElement('script');
-		s.src = 'https://www.googletagmanager.com/gtag/js?id=G-83WYW3XP87';
-		s.async = true;
-		s.onload = () => {
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){ dataLayer.push(arguments); }
-		  gtag('js', new Date());
-		  gtag('config', 'G-83WYW3XP87', { anonymize_ip: true });
+	  (function () {
+		if (navigator.connection?.saveData) return;
+		let loaded = false;
+		const loadGA = () => {
+		  if (loaded) return; loaded = true;
+		  for (const h of ['https://www.googletagmanager.com','https://www.google-analytics.com']) {
+			const l = document.createElement('link');
+			l.rel = 'preconnect'; l.href = h; l.crossOrigin = 'anonymous';
+			document.head.appendChild(l);
+		  }
+		  const s = document.createElement('script');
+		  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-83WYW3XP87';
+		  s.async = true;
+		  s.onload = () => {
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){ dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-83WYW3XP87', { anonymize_ip: true, send_page_view: false });
+			gtag('event', 'page_view');
+		  };
+		  document.head.appendChild(s);
+		  off();
 		};
-		document.head.appendChild(s);
-	  };
-	  if (!navigator.connection || !navigator.connection.saveData) {
-		const rIC = window.requestIdleCallback || ((fn) => setTimeout(fn, 4000));
-		addEventListener('load', () => rIC(deferGA), { once: true });
-	  }
-	  </script>
-	)}
+		const opts = { once:true, passive:true, capture:true };
+		const events = [['pointerdown',loadGA],['keydown',loadGA],['scroll',loadGA]];
+		const off = () => events.forEach(([e,f]) => window.removeEventListener(e,f,opts));
+		events.forEach(([e,f]) => window.addEventListener(e,f,opts));
+		window.addEventListener('load', () => setTimeout(loadGA, 10000), { once:true });
+	  })();
+	</script>
+  )}
   </body>
 </html>
